@@ -1,0 +1,43 @@
+body {
+background-color: rgb(255, 255, 255) ;
+}
+
+/* Corpo do texto*/
+#bodytext {
+	background-color: rgb(255, 255, 255);
+	width: 1000px;
+	margin-right: auto;
+	margin-left: auto;
+
+}
+
+li{
+    margin: 10px 0;
+	}
+
+#espaço{
+	width: auto;
+	height: 50px;
+}
+	
+/* Estilo das imagens*/
+#gabinete{
+width: 430px;
+height: 300px;
+}
+
+#padraoKaxinwá {
+	width: 430px;
+	height: 300px;
+}
+
+
+#padraoAthosFGV {
+	width: 300px;
+	height: 400px;
+	transform:rotate(90deg);
+}
+
+#fonte{
+	font-size : 12px;
+}

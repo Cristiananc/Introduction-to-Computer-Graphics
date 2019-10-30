@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            A2 Computação Gráfica
+        </title>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+
+        <!-- MathJax para equações matemáticas em TeX-->
+	<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" 
+        async>
+    </script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+
+    </head>
+    <body>
+    <div id="bodytext">
+        <center>
+        <div class="cabecalho">
+            <h1 class="title" >
+            Utilizando SVG para criação de padrões com operações de simetria
+            </h1>
+            <p>
+                Escola de Matemática Aplicada - EMAp
+                Fundação Getulio Vargas <br>
+                Cristiana Aparecida Nogueira Couto¹ <br>
+                Profª : Asla Medeiros e Sá <br>
+                Disciplina: Introdução à Computação Gráfica <br>
+            </p>
+            <p> <font size=2px> ¹cristiananc@hotmail.com, graduanda em Matemática Aplicada. </font> </p>
+        </div>
+        </center>
+        <hr>
+        <hr>
+        <div class="introducao">
+            <h3>Introdução</h3>
+            <p>
+                Padrões estão presentes em todos os lugares, seja nas estampas de roupas que usamos, 
+            cerâmicas, ladrilhos, e muitos outros. Padrões são úteis em gráficos
+            quando usados com texturas. Além disso, podem ser usados para criar superfícies diversas 
+            como madeira, cortiça, couro e efeitos de ilusão de ótima com aplicações desde 
+            ornamentação à estruturas 3D complexas. 
+            </p>
+            <center> <figure>
+                    <img src="images/padrõesgabinete.png" id="gabinete"
+                    alt="Padrões do Piso do Gabinete Português de Leitura" border="0">
+
+                    <img src="images/padraoKaxinwá.jpg" id="padraoKaxinwá"
+                    alt="Padrões povo Kaxinwá" border="0">                  
+                
+                    <figcaption>Figura 1: Padrões do piso do Gabinete Português de Leitura no
+                            Rio de Janeiro (à esquerda) e padrões gráficos característicos do povo Kaxinwá/AC. Coleção
+                            Museu do Índio RJ, 2008. Exposição ICM- RJ 2018 (à direita).
+                           <br> <p id=fonte>Fonte : Arquivo Pessoal </p>
+                    </figcaption>
+
+                </figure>
+                <figure>
+                    <img src="images/AthospadrãoFGV.jpg" id="padraoAthosFGV"
+                    alt="Padrões do artista Athos na FGV" border="0">  
+                </figure>
+            </center>
+            <h4>
+                Trabalhando com padrões
+            </h4>
+            <p>
+                <ol>
+                    <li> O primeiro passo é criar texturas; </li>
+                
+                    É possível criar textutas de maneira algoritmica. Uma das técnicas mais simples é 
+                chamada <i>tiling</i> (ladrilhamento), onde são colocadas múltiplas cópias de um único
+                formato de acordo com algumas regras, como por exemplo um conjunto de operações de simetria.
+                Uma curiosidade interessante é que apenas 3 polígonos regulares cobrem o plano sem
+                lacunas (gaps) ou sobreposição (overlaps), são eles : triângulo, quadrado e hexágono
+                regular. Há uma quantidade infinita de formas que podemos usar, 
+                mas essas são as mais simples.
+            </p>
+            <center>
+            <figure>
+
+            <img src="images/hexagonoPattern.svg" alt="Hexágonos regulares em SVG" height="200px" width="250px"/>
+            <img src="images/triangulos.svg" alt="Triângulos SVG" height="200px" width="200" />
+            <img src="images/quadrados.svg" alt="Quadrados SVG" height="200px" width="200" />
+            </figure>
+            <figcaption> Figura 2 : Exemplos com poligónos regulares feitos em SVG.</figcaption>
+            </center>
+            <p>
+                Um exemplo utilizando operações simétricas é a criação de um quadrado com a letra F
+                formado por quadradinhos. Há oito modos de colocar esse "ladrilho" paralelo ao plano,
+                contando flip e rotações.
+            </p>
+            
+            <p>
+                <li> O segundo passo é criar um novo quadrado; </li>
+                Aqui podemos criar um padrão quadrado com 4 quadrados do passo anterior de 8^4 maneiras.
+            Podemos usar operações com simetria: translação, rotação, reflexão e glide para criar padrões
+            visualmente interessantes, assim podemos criar funções com uma sequência de operações que criam
+            esses padrões simétricos.
+            </p>
+                </ol>
+                <h4>
+                        Padrões períodicos e aperíodicos
+                </h4>
+                <p>
+                    Cada polígono é chamado de "tile", e a composição do padrão é chamado de "tiling". 
+                Podemos controlar nossos padrões tiling adotando regras que descrevam de que modos cada
+                tile pode ser colocado ao lado do outro.
+                </p>
+                <p>
+                    No caso dos padrões períodicos há uma célula fundamental que se repete atráves de
+                translações para cobrir o plano. Em geral, em qualquer tiling períodico existe um número
+                infinito de células fundamentais. Há também os padrões quase períodicos, onde pode-se
+                achar grandes repetições de padrões, apesar do padrão completo nunca se repetir.
+                </p>
+                <p> 
+                    Em 1961, Alao Wang conjecturou que não haviam tiles aperíodicos.
+                </p>
+                <p>
+                    Pode-se criar também um padrão de encaixe nas arestas ou dispensar esse padrão 
+                e utilizar uma decoração representando essas arestas encaixantes.
+                </p>
+        <hr>
+        <div class="results">
+            <h3>Resultados </h3>
+            <p>
+                O objetivo no trabalho foi criar algumas texturas a partir de fórmulas simples.
+            </p>
+
+        <center>
+        <svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" >
+
+            <!-- Criando o quadrado fundamental-->
+            <defs>
+                <g id= "background">
+                <rect width="200" height="200" x="0" y="0" fill="rgb(99,231,170)"
+                stroke= "orange" stroke-width="4">
+                </g>
+                <g id="color-circle">
+                    <circle r="50" fill="rgb(150, 161, 46)" cx="50" cy="50"/>
+                </g>
+
+                <symbol id="T">
+                    <use xlink:href="#background" x="0" y="0"/>
+                    <use xlink:href="#color-circle" x="20" y="0"/>
+                    <rect width="90" height="10" x="100" y="150" fill= "rgb(150,25,160)"/> 
+                    <rect width="20" height="70" x="100" y="87" fill= "rgb(150,25,160)"/> 
+                    <rect width="90" height="25" x="65" y="62" fill = "rgb(150,25,160)"/>
+                </symbol>
+            
+            <symbol id="padraoT">
+
+            <!--Cópias do símbolo com operações de rotação-->
+            <use xlink:href="#T" x="0" y="0" />
+            <use xlink:href="#T" transform ="rotate(90, 200, 200)"/>
+            <use xlink:href="#T" transform ="rotate(180, 200, 200)"/>
+            <use xlink:href="#T" transform ="rotate(270, 200, 200)"/>
+            </symbol>
+
+            </defs>
+
+            <symbol id="padraoT2">
+            <use xlink:href="#padraoT" 
+            transform= "translate( 0 0) translate(800 0) scale( 0.5 ) translate( -800 0) "/>
+            </symbol>
+
+            <use xlink:href="#padraoT" x="0" y="0" />
+            <use xlink:href="#padraoT2" />
+            <use xlink:href="#padraoT2" transform ="rotate(90, 600, 200)"/>
+            <use xlink:href="#padraoT2" transform ="rotate(180, 600, 200)"/>
+            <use xlink:href="#padraoT2" transform ="rotate(270, 600, 200)"/>
+
+        </svg>
+        <div id= "espaço">
+
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" id="svgJS" >
+
+            <!-- Criando o quadrado fundamental-->
+
+            <defs>
+            <g id= "background2">
+                    <rect width="200" height="200" x="0" y="0" fill="rgb(47, 206, 179)"
+                    stroke= "gold" stroke-width="4">
+            </g>
+
+                <symbol id="tile2">
+                    <use xlink:href="#background2" x="0" y="0"/>
+                    <circle r="50" fill="rgb(200, 161, 10)" cx="120" cy="200"/>
+                    <circle r="50" fill="rgb(200, 161, 10)" cx="120" cy="0"/>
+                    <rect width="40" height="20" x="50" y="150" fill= "rgb(150,100,160)"/> 
+                    <rect width="90" height="10" x="100" y="150" fill= "rgb(200,25,160)"/> 
+                    <rect width="20" height="70" x="100" y="87" fill= "rgb(200,25,160)"/> 
+                    <rect width="90" height="25" x="15" y="62" fill = "rgb(200,25,160)"/>
+                </symbol>
+            </defs>
+
+            <use id="usingtile2" xlink:href="#tile2" x="0" y="0"/>
+
+        </svg>
+        </center>
+
+        <hr>
+        <div class="conclusao">
+            <h3>Conclusões</h3> 
+            
+        </div>
+        <hr>
+        <div class="referencias">
+            <h3>Referências</h3>
+            
+        </div>
+        <hr>
+        </div>
+        <script type="text/javascript" src="JS/main.js"></script>
+    </body>
+<!--
+    Sites referência:
+    https://www.ime.usp.br/~thaicia/quasicristais/index.html
+    http://mat.unb.br/lemat/wp-content/uploads/2015/09/06APRESENTACAO.pdf
+    https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/transform
+    http://frontendbabel.info/articles/svg-grouping-and-reusing-elements/
+    https://observablehq.com/@esperanc/inspired-by-athos-bulcao
+    https://petercollingridge.appspot.com/svg-optimiser
+    http://www.petercollingridge.co.uk/tutorials/svg/interactive/javascript/
+    https://www.glassner.com/wp-content/uploads/2014/04/CG-CGA-PDF-00-07-Hierarchical-Textures-July00.pdf
+
+        *
+    -->
+</html>
