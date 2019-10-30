@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            A1 Computação Gráfica
+        </title>
+        <!-- MathJax para equações matemáticas em TeX-->
+	<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" 
+        async>
+    </script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+
+    </head>
+    <body>
+        <center>
+        <div class="cabecalho">
+            <h1 class="title" >
+             Criação de imagem binária interativa para a implementação 
+             da técnica de inpainting em imagens digitais
+            </h1>
+            <p>
+                Escola de Matemática Aplicada - EMAp
+                Fundação Getulio Vargas <br>
+                Cristiana Aparecida Nogueira Couto¹ <br>
+                Profª : Asla Medeiros e Sá <br>
+                Disciplina: Introdução à Computação Gráfica <br>
+            </p>
+            <p> <font size=2px> ¹cristiananc@hotmail.com, graduanda em Matemática Aplicada. </font> </p>
+        </div>
+        </center>
+        <hr>
+        <div class="resumo">
+            <h3>Resumo</h3>
+            <p> 
+                O presente trabalho apresenta a implementação de alguns conceitos de processamento 
+                de imagens vistos na disciplina de Introdução à Computação Gráfica.
+                 Uma imagem física foi digitalizada e transformada em imagem matricial, a qual foi
+                feito um processamento para uma futura aplicação da técnica de inpainting para o 
+                restauro dessa imagem. 
+            </p>
+            
+        </div>
+        <hr>
+        <div class="introducao">
+            <h3>Introdução</h3>
+            <p> 
+                Chama-se imagem digital a uma imagem  
+                \( f:\mathbb{U} \rightarrow \mathbb{R^3} \)
+                    onde o suporte <i>U</i> e o espaço de cores estão discretizados. Essa imagem fica 
+                    caracterizada por:
+                <ol>
+                    <li>resolução espacial (número de pixels);</li>
+                    <li>número de componentes de cor;</li>
+                    <li>resolução de cor.</li>
+                </ol>
+                O <i>gamute</i> de   \( f\) é o conjunto de cores   \( f(U) \), que é finito. No
+                caso em que ele possui apenas duas cores dizemos que \( f\) é uma imagem binária [3]. </p>
+            <p>
+                Dentro do processamento de imagens digitais, a restauração de imagens é uma área
+                 de grande relevância. Isso porque nos processos de aquisição de imagem pode 
+                 ocorrer algum tipo de degradação que modifica sua qualidade, além do mais há
+                 também o interesse em restaurar aquelas que foram fisicamente modificadas pelo 
+                 tempo, condições do ambiente, dentre outros.
+            </p>
+            <p>
+            O processo de degradação é modelado como uma função de degradação que somado
+            a um termo que representa o ruído, opera na imagem original \( f(x,y)\) para produzir uma 
+            imagem degrada \( g(x,y)\). A principal fonte de ruídos em imagens digitais surge durante a aquisição da imagem (digitalização)
+            e/ou transmissão. A descrição do ruído no domínio espacial é o comportamento
+            estatístico dos valores de nível de cinza no componente de ruído do modelo. 
+             Esses podem ser considerados variáveis ​​aleatórias[1]. 
+            </p>
+            <p>
+                 Quando a única degradação presente na imagem é o ruído, temos a seguinte função:
+                 \( g(x,y) = f(x,y) + n(x,y) \)
+                Nesse caso, podemos aplicar determinados filtros que tratem esses ruídos
+                 presentes na imagem. São alguns exemplos:
+            </p>
+            <ul>
+                    <li>Filtro da Média Aritmética: O ruído é reduzido como resultado do
+                         embaçamento (blurring) da imagem.
+                    </li>
+                    <li>Filtro da Média Geometrica; </li>
+                    <li>Filtro de Média Contra - hârmonica.</li>
+
+                </ul>
+            <center> <figure>
+                <img src="images/Degradationdiagrama.png" 
+                alt="Degradationdiagrama" border="0">
+                <figcaption>Figura 1: Um modelo para o processo de Degradação/Restauração 
+                    de imagens.
+                </figcaption>
+            </figure></center>
+            <p> 
+                    Reconstrução de partes ausentes ou danificadas de imagens
+                    é uma prática antiga usada extensivamente em obras de arte
+                    restauração. Também conhecido como inpainting, esse
+                    atividade consiste em preencher as áreas ausentes ou
+                    modificar as danificadas de maneira não detectável por
+                    um observador não familiarizado com as imagens originais [4].
+            </p>
+            <center>
+            <figure>
+                    <img src="https://i.ibb.co/fx4RZbG/Captura-de-tela-de-2019-09-29-20-46-13-1.jpg">
+                    <figcaption>
+                        <b>Figura 2:</b> Exemplo de uma restauração de imagem utilizando inpainting. 
+                        Fonte: (TELEA, A.; 2004)
+                    </figcaption>
+            </figure>
+            </center>
+        </div>
+        <div class="metodos">
+
+        </div>
+        <hr>
+        <div class="results">
+            <h3>Resultados </h3>
+            <figure>
+                <canvas id="canvas1" width="300" height="500"
+             style="border: 1px solid rgb(55, 209, 183);"></canvas>
+                <canvas id="rect" width="300" height="500"></canvas>
+                <canvas id="canvas3" width="300" height="500" ></canvas>
+            <figcaption>
+                <button id='reiniciar'>Reiniciar</button>
+                <button id='salvar'>Salvar</button>
+
+            </figcaption>
+            </figure>
+            <figure>
+                <canvas id="canvas4" width="300" height="500" 
+                style="border: 1px solid rgb(54, 187, 42);" ></canvas>
+                <canvas id="canvas5" width="300" height="500" ></canvas>
+                <figcaption>
+
+                </figcaption>
+            </figure>
+            <p>
+                    A imagem utilizada é uma foto antiga que sofreu uma degradação física. A foto foi 
+                    digitalizada e salva em jpg. Criada a máscara binária podemos então utilizar a máscara para indicar em quais 
+            regiões o algoritmo de inpainting deve atuar.
+            </p>
+            <!---Exemplo de ferramenta online que implementa essa ideia
+                https://www.nvidia.com/research/inpainting/selection -->
+        </div>
+        <hr>
+        <div class="conclusion">
+            <h3>Conclusões</h3> 
+            <p>
+                Com este trabalho foi possível adquirir conhecimentos sobre processamento de imagens
+                digitais em geral e também ampliar habilidades de programação em JavaScript. Pretende-se
+                continuar com a seleção das regiões utilizando retângulos e outras primitivas gráficas
+                e futuramente uma implementação do algoritmo de inpainting usando como referência uma implementação já existente em 
+
+                <a href="https://ece.uwaterloo.ca/~ece417/Projects/2018/Project1/main.html">Matlab</a>.
+            </p>
+        </div>
+        <hr>
+        <div class="referencias">
+            <h3>Referências</h3>
+            <ol>
+                <li>
+                   <p>GONZALEZ, R. C., & WOODS, R. E.; <cite>Digital image processing</cite>, Upper Saddle River, N.J: Prentice Hall, (2002)</p>
+                </li>
+                <li>
+                   <p>TELEA, A.; <cite>An Image Inpainting Technique Based on the Fast Marching Method</cite>, Default journal, (2004)</p>
+                </li>
+                <li>
+                    <p>GOMES, J. & VELHO, L.; <cite>Fundamentos da Computação Gráfica</cite>, IMPA, (2008)</p>
+                </li>
+                <li>
+                        <p>OLIVEIRA, M. et. al; <cite>Fast Digital Image Inpainting </cite>,  Proceedings of the International Conference on Visualization, 
+                            Imaging and Image Processing, (2001)</p>
+                </li>
+             </ol>
+        </div>
+        <hr>
+        <script type="text/javascript" src="JS/main.js"></script>
+    </body>
+<!--
+    Sites referência para os códigos:
+    * https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Pixel_manipulation_with_canvas
+
+    * https://stackoverflow.com/questions/10623678/html5-canvas-how-to-draw-a-line-over-an-image-background
+
+    * https://medium.com/@jagadeshanh/html5-canvas-click-and-draw-f665e02f5744
+
+    * https://css-tricks.com/manipulating-pixels-using-canvas/
+
+    https://dev.opera.com/articles/html5-canvas-painting/
+    
+    https://www.cs.toronto.edu/~mangas/teaching/320/assignments/a2/Criminisi_cvpr2003.pdf
+
+    https://lavrton.com/hit-region-detection-for-html5-canvas-and-how-to-listen-to-click-events-on-canvas-shapes-815034d7e9f8/
+
+    -->
+</html>
