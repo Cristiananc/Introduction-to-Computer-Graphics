@@ -43,10 +43,10 @@
             ornamentação à estruturas 3D complexas. 
             </p>
             <center> <figure>
-                    <img src="images/padrõesgabinete.png" id="gabinete"
+                    <img src="images/padrõesgabinete.png" id="figure1"
                     alt="Padrões do Piso do Gabinete Português de Leitura" border="0">
 
-                    <img src="images/padraoKaxinwá.jpg" id="padraoKaxinwá"
+                    <img src="images/padraoKaxinwá.jpg" id="figure1"
                     alt="Padrões povo Kaxinwá" border="0">                  
                 
                     <figcaption>Figura 1: Padrões do piso do Gabinete Português de Leitura no
@@ -57,8 +57,18 @@
 
                 </figure>
                 <figure>
-                    <img src="images/AthospadrãoFGV.jpg" id="padraoAthosFGV"
+                    <img src="images/AthospadrãoFGV.jpg" id="figure1"
                     alt="Padrões do artista Athos na FGV" border="0">  
+
+                    <img src="images/Museu-da-República.jpg" id="figure1"
+                    alt="Padrões no piso do Museu da República" border="0">  
+
+                    <figcaption>
+                        Figura 2 : Padrões na parede do 14º andar da Fundação Getulio Vargas feitos pelo
+                        artista Athos Bulcão (à esquerda) e padrões no piso do primeiro andar do 
+                        Museu da República (à direita).
+                        <br> <p id=fonte>Fonte : Arquivo Pessoal </p>
+                    </figcaption>
                 </figure>
             </center>
             <h4>
@@ -184,13 +194,17 @@
                     stroke= "gold" stroke-width="4">
             </g>
 
+            <symbol id="circle">
+                <circle r="50" fill="rgb(200, 161, 10)"/>
+            </symbol>
+
                 <symbol id="tile2">
                     <use xlink:href="#background2" x="0" y="0"/>
-                    <circle r="50" fill="rgb(200, 161, 10)" cx="120" cy="200"/>
                     <circle r="50" fill="rgb(200, 161, 10)" cx="120" cy="0"/>
-                    <rect width="40" height="20" x="50" y="150" fill= "rgb(150,100,160)"/> 
-                    <rect width="90" height="10" x="100" y="150" fill= "rgb(200,25,160)"/> 
-                    <rect width="20" height="70" x="100" y="87" fill= "rgb(200,25,160)"/> 
+                    <use xlink:href="#circle" x="40" y="50">
+                    <rect width="40" height="20" x="40" y="120" fill= "rgb(150,100,160)"/> 
+                    <rect width="70" height="10" x="80" y="120" fill= "rgb(200,25,160)"/> 
+                    <rect width="20" height="50" x="100" y="62" fill= "rgb(200,25,160)"/> 
                     <rect width="90" height="25" x="15" y="62" fill = "rgb(200,25,160)"/>
                 </symbol>
             </defs>
@@ -208,7 +222,20 @@
         <hr>
         <div class="referencias">
             <h3>Referências</h3>
-            
+            <p>
+            GLASSNER, Andrew. Hierarchical Textures. <b> Ieee Computer Graphics And Applications, </b>
+            p.104-109, ago. 2000. Disponível em: 
+            <a href : "https://www.glassner.com/wp-content/uploads/2014/04/CG-CGA-PDF-00-07-Hierarchical-Textures-July00.pdf"> 
+                https://www.glassner.com/wp-content/uploads/2014/04/CG-CGA-PDF-00-07-Hierarchical-Textures-July00.pdf</a>. 
+            Acesso em: 17 out. 2019.
+            </p>
+            <p>
+            GLASSNER, Andrew. Aperiodic Tiling. <b> Ieee Computer Graphics And Applications, </b>
+            p.83-90, jun. 1998. Disponível em: 
+            <a href : "https://www.glassner.com/wp-content/uploads/2014/04/CG-CGA-PDF-98-05-Aperiodic-Tiling-May98.pdf"> 
+            https://www.glassner.com/wp-content/uploads/2014/04/CG-CGA-PDF-98-05-Aperiodic-Tiling-May98.pdf</a>. 
+            Acesso em: 17 out. 2019.
+            </p>
         </div>
         <hr>
         </div>

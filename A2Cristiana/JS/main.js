@@ -16,22 +16,20 @@ function clone(tile, n){
    }
 
 // Regras para padrão formado com operações de simetria
-//Rotação
+var r90 = "rotate(90, 200, 200)";
+var r180 = "rotate(180, 200, 200)";
+var r270 = "rotate(270, 200, 200)";
 
-function rotate(){
+function pattern4x4(tile, x, y) {
+    clone(tile, 4)
+    newT0.setAttributeNS(null, 'x', x);
+    newT0.setAttributeNS(null, 'y', y);
 
-}
+    newT1.setAttributeNS(null, 'transform', r90);
+    newT2.setAttributeNS(null, 'transform', r180);
+    newT3.setAttributeNS(null, 'transform', r270);
 
-function pattern4x4(tile, x, y, rules) {
-    clone(tile, 3)
-    newT0.setAttributeNS(null, 'x', x + 200);
-    newT1.setAttributeNS(null, 'x', x + 0);
-    newT1.setAttributeNS(null, 'y', y + 200);
-    newT2.setAttributeNS(null, 'x', x + 200);
-    newT2.setAttributeNS(null, 'y', y + 200);
-    newT3.setAttributeNS(null, 'x', x + 0);
-    newT3.setAttributeNS(null, 'y', y + 0);
-    rules()
 }
 
 pattern4x4(tile2, 0, 0);
+
