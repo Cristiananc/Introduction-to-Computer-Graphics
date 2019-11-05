@@ -100,7 +100,7 @@ function horizontalFlip (n){
 var example = document.getElementById('newT03');
 example.setAttributeNS(null, 'transform', flipH);
 
-//SVG Interativo
+//SVG Classes dos elementos
 // Ref : https://github.com/lucasmoschen/Computer_Graphics/blob/master/docs/Exercises/file.js
 class Rectangle {
     constructor(id, group, x, y, width, height, color){
@@ -164,54 +164,54 @@ class Circle {
 
 // Criando diferente tiles utilizando classes
 createGroups('T1', svgElementos);
-createUse('#T1', svgElementos);
 var t1 = document.getElementById('T1');
 new Rectangle('t1background',t1, 0, 0, 100, 100, 'rgb(173,255,47)');
 new Polygon('t1p', t1, "0 0 100 100 0 100", "rgb(255,69,0)");
 
 createGroups('T2', svgElementos);
-createUse('#T2', svgElementos);
 var t2 = document.getElementById('T2');
 new Rectangle('t2background',t2, 200, 0, 100, 100, 'rgb(173,255,47)');
 new Rectangle('t2q',t2, 245, 0, 10, 100, 'rgb(255,69,0)');
 
 createGroups('T3', svgElementos);
-createUse('#T3', svgElementos);
 var t3 = document.getElementById('T3');
 new Rectangle('t3background',t3, 400, 0, 100, 100, 'rgb(173,255,47)');
 new Rectangle('t3q',t3, 400, 0, 45, 100, 'rgb(255,69,0)');
 
 createGroups('T4', svgElementos);
-createUse('#T4', svgElementos);
 var t4 = document.getElementById('T4');
 new Rectangle('t4background',t4, 600, 0, 100, 100, 'rgb(173,255,47)');
 new Circle('t4q',t4, 650, 50, 25, 'rgb(255,69,0)');
 
-console.log(count);
+createGroups('T5', svgElementos);
+var t5 = document.getElementById('T5');
+new Rectangle('t5background',t5, 800, 0, 100, 100, 'rgb(173,255,47)');
+new Circle('t5q',t5, 850, 50, 25, 'rgb(255, 69, 0)');
+new Rectangle('t5r',t5, 800, 50, 50, 50, 'rgb(255,69,0)');
 
 // Montar a construção aleatória
 function randomTiling (xp, yp){
-            random = getRandomInt(1, 5);
-            aux = "T" + random;
-            let element = document.getElementById(aux);
-            clone(element, 1, svgRandom);
-            auxId = "newT0" + count;
-            let cloneElem = document.getElementById(auxId);
-            let pos = cloneElem.getBBox();
-            let x = - pos.x;
-            cloneElem.setAttributeNS(null, 'transform', 'translate ('+xp+' '+yp+') translate( '+ x +' 0)');
-            console.log(pos);
+    random = getRandomInt(1, 6);
+    aux = "T" + random;
+    let element = document.getElementById(aux);
+    clone(element, 1, svgRandom);
+    auxId = "newT0" + count;
+    let cloneElem = document.getElementById(auxId);
+    let pos = cloneElem.getBBox();
+    let x = - pos.x;
+    let y = - pos.y;
+    cloneElem.setAttributeNS(null, 'transform', 'translate ('+xp+' '+yp+') translate( '+ x +' '+ y+')');
 }
 
-   function draw(){
-       let position = 0;
-        for (j = 0; j < 8 ; j ++){
-            randomTiling(position, 0);
-            randomTiling(position, 100);
-            randomTiling(position, 200);
-            randomTiling(position, 300);
-            position = position + 100;
-        }
-   }
+function draw(){
+    let position = 0;
+    for (j = 0; j < 8 ; j ++){
+        randomTiling(position, 0);
+        randomTiling(position, 100);
+        randomTiling(position, 200);
+        randomTiling(position, 300);
+        position = position + 100;
+    }
+}
 draw();
 
