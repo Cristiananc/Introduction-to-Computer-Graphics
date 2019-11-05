@@ -1,6 +1,7 @@
 var svg = document.getElementById('svgJS');
 var tile2 = document.getElementById('usingtile2');
-var svgInterativo = document.getElementById('svgInterativo');
+var svgElementos = document.getElementById('svgElementos');
+var svgRandom = document.getElementById('svgRandom');
 
 var  svgns = "http://www.w3.org/2000/svg";
 var  xlinkns = "http://www.w3.org/1999/xlink";
@@ -162,29 +163,55 @@ class Circle {
 }
 
 // Criando diferente tiles utilizando classes
-createGroups('T1', svgInterativo);
-createUse('#T1', svgInterativo);
+createGroups('T1', svgElementos);
+createUse('#T1', svgElementos);
 var t1 = document.getElementById('T1');
 new Rectangle('t1background',t1, 0, 0, 100, 100, 'rgb(173,255,47)');
 new Polygon('t1p', t1, "0 0 100 100 0 100", "rgb(255,69,0)");
 
-createGroups('T2', svgInterativo);
-createUse('#T2', svgInterativo);
+createGroups('T2', svgElementos);
+createUse('#T2', svgElementos);
 var t2 = document.getElementById('T2');
 new Rectangle('t2background',t2, 200, 0, 100, 100, 'rgb(173,255,47)');
 new Rectangle('t2q',t2, 245, 0, 10, 100, 'rgb(255,69,0)');
 
-createGroups('T3', svgInterativo);
-createUse('#T3', svgInterativo);
+createGroups('T3', svgElementos);
+createUse('#T3', svgElementos);
 var t3 = document.getElementById('T3');
 new Rectangle('t3background',t3, 400, 0, 100, 100, 'rgb(173,255,47)');
 new Rectangle('t3q',t3, 400, 0, 45, 100, 'rgb(255,69,0)');
 
-createGroups('T4', svgInterativo);
-createUse('#T4', svgInterativo);
+createGroups('T4', svgElementos);
+createUse('#T4', svgElementos);
 var t4 = document.getElementById('T4');
 new Rectangle('t4background',t4, 600, 0, 100, 100, 'rgb(173,255,47)');
 new Circle('t4q',t4, 650, 50, 25, 'rgb(255,69,0)');
-console.log(t4)
 
-// Montar a construção aleatória e se possível adicionar checkbox
+console.log(count);
+
+// Montar a construção aleatória
+function randomTiling (xp, yp){
+            random = getRandomInt(1, 5);
+            aux = "T" + random;
+            let element = document.getElementById(aux);
+            clone(element, 1, svgRandom);
+            auxId = "newT0" + count;
+            let cloneElem = document.getElementById(auxId);
+            let pos = cloneElem.getBBox();
+            let x = - pos.x;
+            cloneElem.setAttributeNS(null, 'transform', 'translate ('+xp+' '+yp+') translate( '+ x +' 0)');
+            console.log(pos);
+}
+
+   function draw(){
+       let position = 0;
+        for (j = 0; j < 8 ; j ++){
+            randomTiling(position, 0);
+            randomTiling(position, 100);
+            randomTiling(position, 200);
+            randomTiling(position, 300);
+            position = position + 100;
+        }
+   }
+draw();
+
