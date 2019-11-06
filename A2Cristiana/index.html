@@ -37,10 +37,10 @@
             <h3>Introdução</h3>
             <p>
                 Padrões estão presentes em todos os lugares, seja nas estampas de roupas que usamos, 
-            cerâmicas, ladrilhos, e muitos outros. Padrões são úteis em gráficos
+            cerâmicas, pisos, e muitos outros. Padrões são úteis em gráficos
             quando usados com texturas. Além disso, podem ser usados para criar superfícies diversas 
-            como madeira, cortiça, couro e efeitos de ilusão de ótima com aplicações desde 
-            ornamentação à estruturas 3D complexas. 
+            como madeira, cortiça, couro e efeitos de ilusão de ótica com aplicações desde 
+            ornamentação à estruturas 3D complexas [1]. 
             </p>
             <center> <figure>
                     <img src="images/padrõesgabinete.png" id="figure1"
@@ -64,7 +64,7 @@
                     alt="Padrões no piso do Museu da República" border="0">  
 
                     <figcaption>
-                        Figura 2 : Padrões na parede do 14º andar da Fundação Getulio Vargas feitos pelo
+                        Figura 2 : Padrões na parede do 15º andar da Fundação Getulio Vargas feitos pelo
                         artista Athos Bulcão (à esquerda) e padrões no piso do primeiro andar do 
                         Museu da República (à direita).
                         <br> <p id=fonte>Fonte : Arquivo Pessoal </p>
@@ -100,10 +100,17 @@
                 formado por quadradinhos. Há oito modos de colocar esse "ladrilho" paralelo ao plano,
                 contando flip e rotações.
             </p>
-            
+            <center>
+                <figure>
+                <img src="images/letraF.jpg" alt="Letra F SVG" height="200px" width="350px"/>
+                </figure>
+                <figcaption> Figura 3 : Os oito modos de se colocar um ladrilho quadrado.
+                    <br> <p id=fonte>Fonte : (GLASSNER, 2000). </p>
+                </figcaption>
+            </center>
             <p>
                 <li> O segundo passo é criar um novo quadrado; </li>
-                Aqui podemos criar um padrão quadrado com 4 quadrados do passo anterior de 8^4 maneiras.
+                Aqui podemos criar um padrão quadrado com 4 quadrados do passo anterior de \( 8^{4} \) maneiras.
             Podemos usar operações com simetria: translação, rotação, reflexão e glide para criar padrões
             visualmente interessantes, assim podemos criar funções com uma sequência de operações que criam
             esses padrões simétricos.
@@ -113,29 +120,31 @@
                         Padrões períodicos e aperíodicos
                 </h4>
                 <p>
-                    Cada polígono é chamado de "tile", e a composição do padrão é chamado de "tiling". 
-                Podemos controlar nossos padrões tiling adotando regras que descrevam de que modos cada
-                tile pode ser colocado ao lado do outro.
+                    Cada polígono é chamado de ladrilho (<i>tile</i>), e a composição do padrão é chamado de ladrilhamento (<i>tiling</i>). 
+                Podemos controlar nossos padrões de ladrilhamento adotando regras que descrevam de que modos cada
+                ladrilho pode ser colocado ao lado do outro.
                 </p>
                 <p>
                     No caso dos padrões períodicos há uma célula fundamental que se repete atráves de
-                translações para cobrir o plano. Em geral, em qualquer tiling períodico existe um número
+                translações para cobrir o plano. Em geral, em qualquer ladrilhamento períodico existe um número
                 infinito de células fundamentais. Há também os padrões quase períodicos, onde pode-se
                 achar grandes repetições de padrões, apesar do padrão completo nunca se repetir.
-                </p>
-                <p> 
-                    Em 1961, Alao Wang conjecturou que não haviam tiles aperíodicos.
-                </p>
-                <p>
-                    Pode-se criar também um padrão de encaixe nas arestas ou dispensar esse padrão 
+
+                Além disso, pode-se criar também um padrão de encaixe nas arestas ou dispensar esse padrão 
                 e utilizar uma decoração representando essas arestas encaixantes.
                 </p>
+                <p> 
+                    Em 1961, Alao Wang conjecturou que não havia um conjunto de ladrilhos que fossem
+                    aperíodicos. Desde então, surgiram alguns exemplos de conjuntos que refutaram essa prova.
+                </p>
+                <hr>
         <hr>
         </div>
         <div class="results">
             <h3>Resultados </h3>
             <p>
-                O objetivo no trabalho foi criar algumas texturas a partir de fórmulas simples.
+                O objetivo no trabalho foi criar algumas texturas a partir de fórmulas simples. A seguir 
+            estão os resultados obtidos:
             </p>
 
         <center>
@@ -238,27 +247,42 @@
         <hr>
         <div class="referencias">
             <h3>Referências</h3>
-            <p>
-            GLASSNER, Andrew. Hierarchical Textures. <b> Ieee Computer Graphics And Applications, </b>
-            p.104-109, ago. 2000. Disponível em: 
-            <a href : "https://www.glassner.com/wp-content/uploads/2014/04/CG-CGA-PDF-00-07-Hierarchical-Textures-July00.pdf"> 
-                https://www.glassner.com/wp-content/uploads/2014/04/CG-CGA-PDF-00-07-Hierarchical-Textures-July00.pdf</a>. 
-            Acesso em: 17 out. 2019.
-            </p>
-            <p>
-            GLASSNER, Andrew. Aperiodic Tiling. <b> Ieee Computer Graphics And Applications, </b>
-            p.83-90, jun. 1998. Disponível em: 
-            <a href : "https://www.glassner.com/wp-content/uploads/2014/04/CG-CGA-PDF-98-05-Aperiodic-Tiling-May98.pdf"> 
-            https://www.glassner.com/wp-content/uploads/2014/04/CG-CGA-PDF-98-05-Aperiodic-Tiling-May98.pdf</a>. 
-            Acesso em: 17 out. 2019.
-            </p>
+            <ol>
+                <li>
+                    <p>
+                        GLASSNER, Andrew. Hierarchical Textures. <cite> Ieee Computer Graphics And Applications, </cite>
+                        p.104-109, ago. 2000. Disponível em: 
+                        <a href : "https://www.glassner.com/wp-content/uploads/2014/04/CG-CGA-PDF-00-07-Hierarchical-Textures-July00.pdf"> 
+                            https://www.glassner.com/wp-content/uploads/2014/04/CG-CGA-PDF-00-07-Hierarchical-Textures-July00.pdf</a>. 
+                        Acesso em: 17 out. 2019.
+                        </p>
+                </li>
+                <li>
+                    <p>
+                        GLASSNER, Andrew. Aperiodic Tiling. <cite> Ieee Computer Graphics And Applications, </cite>
+                        p.83-90, jun. 1998. Disponível em: 
+                        <a href : "https://www.glassner.com/wp-content/uploads/2014/04/CG-CGA-PDF-98-05-Aperiodic-Tiling-May98.pdf"> 
+                        https://www.glassner.com/wp-content/uploads/2014/04/CG-CGA-PDF-98-05-Aperiodic-Tiling-May98.pdf </a>. 
+                        Acesso em: 17 out. 2019.
+                        </p>
+                </li>
+                <li>
+                    <p>
+                        ESPERANÇA, Claúdio. Homage to Athos Bulcão. <cite> Observable, </cite>
+                        Disponível em: 
+                        <a href : "https://observablehq.com/@esperanc/inspired-by-athos-bulcao"> 
+                            https://observablehq.com/@esperanc/inspired-by-athos-bulcao.</a> Acesso em: 28 out. 2019.
+                        </p>                
+                    </li>
+             </ol>
         </div>
+        <hr>
         <hr>
         </div>
         <script type="text/javascript" src="JS/main.js"></script>
     </body>
 <!--
-    Sites referência:
+    Sites referência tutoriais/leitura ou curiosidades:
     https://www.ime.usp.br/~thaicia/quasicristais/index.html
     http://mat.unb.br/lemat/wp-content/uploads/2015/09/06APRESENTACAO.pdf
     https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/transform

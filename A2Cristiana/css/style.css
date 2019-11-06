@@ -16,6 +16,11 @@ li{
     margin: 10px 0;
 	}
 
+h3{
+	color: rgb(38, 122, 179);
+	font-size: 25px;
+}
+
 #espaço{
 	width: auto;
 	height: 50px;
