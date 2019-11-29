@@ -1,18 +1,7 @@
 <!DOCTYPE html>
 <html>
-   <canvas id = 'my_canvas'></canvas>
-	
-   <script>
-      var canvas = document.getElementById('my_canvas');
-      var gl = canvas.getContext('experimental-webgl');
-      var vertices = [];
-      var indices = [];
-    
-      //Definindo a geometria e guardando em objetos buffer
-      var vertex_buffer = gl.createBuffer();
-
-      gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
-      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
-
-   </script>
+   <body>
+      <canvas id = 'my_canvas' width="500" height="500"></canvas>
+      <script type="text/javascript" src="main.js"></script>
+   </body>
 </html>
