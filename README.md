@@ -1,4 +1,4 @@
 # Introduction-to-Computer-Graphics
 
-Click on the link below to access the website for the 2º Assignment:
+Clique no link a seguir para acessar o website do 2º trabalho:
 https://cristiananc.github.io/Introduction-to-Computer-Graphics/A2Cristiana/
