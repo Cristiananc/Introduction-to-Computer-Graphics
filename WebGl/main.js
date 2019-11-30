@@ -2,8 +2,8 @@ var canvas = document.getElementById('my_canvas');
 var gl = canvas.getContext('experimental-webgl');
  
 //Geometria
-var vertices = [
-    //Face frontal
+ var vertices = [
+     //Face frontal
     -1, -1, 1,  -1, 1, 1,   1, -1, 1,   1, 1, 1, 
     //Face lateral direita
     1, -1, 1,   1, -1, -1,  1, 1, -1,   1, 1, 1,
@@ -18,25 +18,18 @@ var vertices = [
 ];
 
 var indices = [
-    0, 1, 2,    1, 2, 3,      4, 5, 6,        6, 7, 4,
+    0, 1, 2,    1, 2, 3,      4, 5, 6,        4, 6, 7,
     8, 9, 10,   10, 11, 8,    12, 13, 15,     15, 14, 13,
     16,17,18,   18, 19, 16,   20, 21, 22,     22,23,20        
-];
+]; 
 
 var cores = [
-    5,3,7, 5,3,7, 5,3,7, 5,3,7,
-    1,1,3, 1,1,3, 1,1,3, 1,1,3,
-    0,0,1, 0,0,1, 0,0,1, 0,0,1,
     1,0,0, 1,0,0, 1,0,0, 1,0,0,
+    0,0,1, 0,0,1, 0,0,1, 0,0,1,
+    1,1,3, 1,1,3, 1,1,3, 1,1,3,
+    1,0,1, 1,0,1, 1,0,1, 1,0,1,
     1,1,0, 1,1,0, 1,1,0, 1,1,0,
     0,1,0, 0,1,0, 0,1,0, 0,1,0
-/*    255,243,0,   255,243,0,   255,243,0,    255,243,0,
-    232, 95, 12,    232, 95, 12,    232, 95, 12,    232, 95, 12,
-    225, 0, 255,    225, 0, 255,    225, 0, 255,    225, 0, 255,
-    12, 116, 232,   12, 116, 232,   12, 116, 232,   12, 116, 232,
-    3, 255, 39,     3, 255, 39,     3, 255, 39,     3, 255, 39,
-    64, 224, 208,   64, 224, 208,   64, 224, 208,   64, 224, 208
-*/
 ];
     
 //Buffer vertíces
@@ -55,12 +48,15 @@ var cores = [
  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(cores), gl.STATIC_DRAW);
 
  //Shader Vertíces
- var vertexCode = 'attribute vec3 coordinates;' +
+ var vertexCode = 'attribute vec3 position;' +
+    'uniform mat4 Pmatrix;' +
+    'uniform mat4 Vmatrix;' +
+    'uniform mat4 Mmatrix;' +
     'attribute vec3 color;' +
     'varying vec3 vColor;' +
 
     'void main(void) {' +
-       'gl_Position = vec4(coordinates, 1.0);' +
+       'gl_Position = Pmatrix*Vmatrix*Mmatrix*vec4(position, 1.0);' +
        'vColor = color;' +
     '}';
 
@@ -86,10 +82,14 @@ var cores = [
  gl.linkProgram(program);
 
  //Associo shaders aos objetos buffer
+ var Pmatrix = gl.getUniformLocation(program, "Pmatrix");
+ var Vmatrix = gl.getUniformLocation(program, "Vmatrix");
+ var Mmatrix = gl.getUniformLocation(program, "Mmatrix");
+
  gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
- var coord = gl.getAttribLocation(program, "coordinates");
- gl.vertexAttribPointer(coord, 3, gl.FLOAT, false, 0, 0);
- gl.enableVertexAttribArray(coord);
+ var position = gl.getAttribLocation(program, "position");
+ gl.vertexAttribPointer(position, 3, gl.FLOAT, false, 0, 0);
+ gl.enableVertexAttribArray(position);
 
  //Repito o processo para aplicar cores
  gl.bindBuffer(gl.ARRAY_BUFFER, cores_buffer);
@@ -99,16 +99,97 @@ var cores = [
  
  gl.useProgram(program);
 
- //Antes de desenhar as primitivas é preciso fazer algumas operações
+ /* Matrizes e Rotação */
  
- gl.enable(gl.DEPTH_TEST);
- gl.clearDepth(1.0);
- gl.clearColor(2, 5 ,0.5, 1) //Método para mudar a cor de fundo
+ function projecao(angle, a, zMin, zMax) {
+     var ang = Math.tan((angle*.5)*Math.PI/180); 
+     return [
+         1/(a*ang), 0, 0, 0,
+         0, 1/(ang), 0, 0,
+         0, 0, - (zMax + zMin)/(zMax - zMin), -1,
+         0, 0, -(2*zMax*zMin)/(zMax - zMin), 0
+     ];
+ }
 
- //View Port
- gl.viewport(0,0, canvas.width, canvas.height);
- gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+ var mov_matrix = [1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1];
+ var view_matrix = [1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1];
 
- //Desenho
- //gl.bindBuffer(gl.ARRAY_BUFFER, index_buffer);
- gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
+ var matriz_Projecao = projecao(45, canvas.width/canvas.height, 1, 100);
+
+ //Translação de z
+ view_matrix[14] = view_matrix[14] - 8;
+
+ function rotacaoX(m, ang){
+    var c = Math.cos(ang);
+    var s = Math.sin(ang);
+    var mv1 = m[1], mv5 = m[5], mv9 = m[9];
+
+    m[1] = m[1]*c - m[2]*s;
+    m[5] = m[5]*c - m[6]*s;
+    m[9] = m[9]*c - m[10]*s;
+    m[2] = m[2]*c + mv1*s;
+    m[6] = m[6]*c + mv5*s;
+    m[10] = m[10]*c + mv9*s;
+ }
+
+ function rotacaoY(m, ang){
+     var c = Math.cos(ang);
+     var s = Math.sin(ang);
+     var mv0 = m[0], mv4 = m[4], mv8 = m[8];
+
+     m[0] = c*m[0] + s*m[2];
+     m[4] = c*m[4] + s*m[6];
+     m[8] = c*m[8] + s*m[10];
+     m[2] =  c*m[2] - s*mv0;
+     m[6] =  c*m[6] - s*mv4;
+     m[10] =  c*m[10] - s*mv8;
+ }
+
+ function rotacaoZ(m, ang){
+    var c = Math.cos(ang);
+    var s = Math.sin(ang);
+    var mv0 = m[0], mv4 = m[4], mv8 = m[8];
+
+    m[0] = c*m[0] - s*m[1];
+    m[4] = c*m[4] - s*m[5];
+    m[8] = c*m[8] - s*m[9];
+    m[1] = c*m[1] + s*mv0;
+    m[5] = c*m[5] + s*mv4;
+    m[9] = c*m[9] + s*mv8;
+}
+
+ //Antes de desenhar as primitivas é preciso fazer algumas operações
+ var tempoAnterior = 0;
+
+ function draw(tempo){
+     var dt = tempo - tempoAnterior;
+     rotacaoX(mov_matrix, dt*0.005);
+     rotacaoY(mov_matrix, dt*0.002);
+     rotacaoZ(mov_matrix, dt*0.003);
+     tempoAnterior = tempo;
+
+    gl.enable(gl.DEPTH_TEST);
+    //gl.enable(gl.LEQUAL);
+    gl.clearDepth(1.0);
+    gl.clearColor(0, 0, 0 , 1) //Método para mudar a cor de fundo
+   
+    //View Port
+    gl.viewport(0,0, canvas.width, canvas.height);
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+   
+    gl.uniformMatrix4fv(Pmatrix, false, matriz_Projecao);
+    gl.uniformMatrix4fv(Vmatrix, false, view_matrix);
+    gl.uniformMatrix4fv(Mmatrix, false, mov_matrix);
+
+    //Desenho
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, index_buffer);
+    gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
+
+    window.requestAnimationFrame(draw);
+}
+ draw(0);
+
+ /* Referências:
+ http://www.ic.uff.br/~aconci/Manipu3D.pdf
+ https://www.tutorialspoint.com/webgl/webgl_cube_rotation.htm
+ */
